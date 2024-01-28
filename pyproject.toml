@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ulibrary-fastapi"
+version = "0.1.0"
+description = "U_library on FastAPI"
+authors = ["HHamlet <hh.harutyunyan@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
