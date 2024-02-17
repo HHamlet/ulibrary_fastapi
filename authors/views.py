@@ -7,4 +7,4 @@ router = APIRouter(prefix="/authors", tags=["Authors"])
 
 @router.get("/", response_model=ShowAuthor)
 async def get_author(name, lastname):
-    return crud.get_author(name, lastname)
+    return await crud.get_author(name, lastname)
