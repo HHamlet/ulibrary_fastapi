@@ -6,5 +6,5 @@ class CreateBookModel(BaseModel):
     author_name: str
     author_surname: str
     year: int
-    isbn: str | None = ("",)
+    isbn: str | None = ""
     published_year: int | None = 0
