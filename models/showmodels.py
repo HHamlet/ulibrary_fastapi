@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class ShowBooks(BaseModel):
@@ -11,3 +11,10 @@ class ShowAuthor(BaseModel):
     id: int
     first_name: str
     last_name: str
+
+
+class ShowStudent(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email: EmailStr
