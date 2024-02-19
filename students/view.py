@@ -24,3 +24,8 @@ async def get_student_by_id(student_id):
 @router.post("/registration")
 async def student_registration(student: CreateStudentModel):
     return await crud.student_registration(student)
+
+
+@router.post("/{student_id}")
+async def delete_student_entity(student_id):
+    return await crud.delete_student_entity(student_id)

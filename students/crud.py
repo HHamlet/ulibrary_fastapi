@@ -49,3 +49,11 @@ async def student_registration(student: CreateStudentModel):
         return {"message": "student registration is done!"}
     else:
         return {"message": "student already exist..."}
+
+
+async def delete_student_entity(student_id):
+    del_statement = select(StudentModel).where(StudentModel.id == student_id)
+    async with async_session() as session:
+        async with session.begin():
+            session.delete(del_statement)
+            session.commit()
