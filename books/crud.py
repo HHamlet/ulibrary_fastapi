@@ -2,43 +2,30 @@ from sqlalchemy import select
 from db import async_session
 from models import BookModel, AuthorModel, BookAuthorModel, Book_CopiesModel
 from books.schemas import CreateBookModel
-
-
-async def get_request(statement):
-    async with async_session() as session:
-        async with session.begin():
-            temp = await session.scalars(statement)
-            result = temp.all()
-        return result
+import helper
 
 
 async def get_books(title):
     statement = select(BookModel).where(BookModel.title.like("%" + title + "%"))
-    result = await get_request(statement)
+    result = await helper.get_request_all(statement)
     return result
 
 
 async def get_book_list():
     statement = select(BookModel)
-    result = await get_request(statement)
+    result = await helper.get_request_all(statement)
     return result
 
 
 async def get_book(title):
     statement = select(BookModel).where(BookModel.title == title)
-    async with async_session() as session:
-        async with session.begin():
-            temp = await session.scalars(statement)
-            result = temp.first()
+    result = await helper.get_request_one(statement)
     return result
 
 
 async def get_book_by_id(book_id):
     statement = select(BookModel).where(BookModel.id == book_id)
-    async with async_session() as session:
-        async with session.begin():
-            temp = await session.scalars(statement)
-            result = temp.first()
+    result = await helper.get_request_one(statement)
     return result
 
 
@@ -46,10 +33,7 @@ async def get_author(name, lastname):
     statement = select(AuthorModel).where(
         AuthorModel.first_name == name, AuthorModel.last_name == lastname
     )
-    async with async_session() as session:
-        async with session.begin():
-            temp = await session.scalars(statement)
-            result = temp.first()
+    result = await helper.get_request_one(statement)
     return result
 
 

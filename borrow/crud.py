@@ -2,25 +2,22 @@ import datetime
 from sqlalchemy import select
 from db import async_session
 from models import BorrowsModel, Book_CopiesModel, StudentModel
-from books.crud import get_request
+import helper
 
 
 async def check_book_in_borrow_table(book_copy_id):
     statement = select(BorrowsModel).where(
         BorrowsModel.book_copies_id == int(book_copy_id)
     )
-    async with async_session() as session:
-        async with session.begin():
-            temp = await session.scalars(statement)
-            result = temp.first()
-        if result is not None:
-            return {"message": "book already borrowed"}
+    result = await helper.get_request_one(statement)
+    if result is not None:
+        return {"message": "book already borrowed"}
     return {"message": "book available for sign to ..."}
 
 
 async def student_taken_books(student_id):
     statement = select(BorrowsModel).where(BorrowsModel.student_id == int(student_id))
-    result = await get_request(statement)
+    result = await helper.get_request_all(statement)
     return result
 
 
