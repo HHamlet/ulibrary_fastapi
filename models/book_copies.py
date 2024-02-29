@@ -12,6 +12,7 @@ class Book_CopiesModel(BaseModel):
     year: Mapped[int] = mapped_column(nullable=True)
     book_id: Mapped[int] = mapped_column(ForeignKey("book.id"))
     book: Mapped[BookModel] = relationship(lazy="joined")
+    price: Mapped[int] = mapped_column(nullable=True)
 
     def __repr__(self):
         return f"Book_CopiesModel(id={self.id},Book={self.book} ISBN={self.isbn}, Year={self.year})"

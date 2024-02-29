@@ -10,7 +10,7 @@ class UserModel(BaseModel):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     username: Mapped[str] = mapped_column(String(50), nullable=False)
-    user_firstname: Mapped[str] = mapped_column(String(50), nullable=False)
+    user_firstname: Mapped[str] = mapped_column(String(50), nullable=True)
     user_lastname: Mapped[str] = mapped_column(String(50), nullable=True)
     user_email: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     right: Mapped[str] = mapped_column(String(50), nullable=True)
