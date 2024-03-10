@@ -38,24 +38,10 @@ async def create_customer_entity(customer: CreateCustomerModel):
                 session.commit()
 
 
-async def get_by_isbn(isbn: str):
-    statement = select(Book_CopiesModel).where(Book_CopiesModel.isbn == isbn)
-    result = await helper.get_request_all(statement)
-    return result
-
-
 async def add_to_cart(customer_id, book_copy_id):
-    statement = select(Book_CopiesModel).where(Book_CopiesModel.id == int(book_copy_id))
-    result = await helper.get_request_one(statement)
-    isbn = result.isbn
-    price = result.price
-    print(isbn, result.price)
-    isbn_res = await get_by_isbn(isbn)
-    print(len(isbn_res))
-    for el in isbn_res:
-        print(el)
-
-    order_item = OrderItemModel(book_copies_id=book_copy_id, customer_id=customer_id)
+    order_item = OrderItemModel(
+        book_copies_id=int(book_copy_id), customer_id=int(customer_id)
+    )
     async with async_session() as session:
         async with session.begin():
             session.add(order_item)

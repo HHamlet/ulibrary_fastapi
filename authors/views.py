@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 import authors.crud as crud
-from models.showmodels import ShowAuthor
+from authors.schemas import ShowAuthor
 
 router = APIRouter(prefix="/authors", tags=["Authors"])
 

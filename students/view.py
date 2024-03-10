@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.showmodels import ShowStudent
+from students.shemas import ShowStudent
 import students.crud as crud
 from students.shemas import CreateStudentModel
 

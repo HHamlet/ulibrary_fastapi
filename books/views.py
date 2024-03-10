@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 import books.crud as crud
-from models.showmodels import ShowBooks
-from books.schemas import CreateBookModel
+from books.schemas import CreateBookModel, ShowBooks
 
 router = APIRouter(prefix="/books", tags=["Books"])
 
