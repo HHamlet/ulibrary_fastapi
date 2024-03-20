@@ -13,13 +13,8 @@ async def get_books(title):
 
 
 async def get_book_list(page: int = 1, per_page: int = 10):
-    offset = (int(page) - 1) * int(per_page)
-    statement = select(BookModel).limit(int(per_page)).offset(offset)
-    result = await helper.get_request_all(statement)
-    total_page = math.ceil(
-        len(await helper.get_request_all(select(BookModel))) / int(per_page)
-    )
-    print(total_page)
+    paginate = helper.Paginate(page=page, per_page=per_page)
+    result = await helper.pagination(paginate, BookModel)
     return result
 
 
