@@ -1,8 +1,15 @@
+from typing import Union
 from fastapi import APIRouter
 import book_copy.crud as crud
+from authors.schemas import ShowAuthor
 from book_copy.schemas import ShowBooksCopy
 
 router = APIRouter(prefix="/book_copy", tags=["Book Copy"])
+
+
+@router.get("/full", response_model=list[list[Union[ShowBooksCopy, ShowAuthor]]])
+async def get_book_copies_full(order_by: int | int = 1):
+    return await crud.get_book_copies_full(order_by=int(order_by))
 
 
 @router.get("/")
