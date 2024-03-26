@@ -6,8 +6,8 @@ router = APIRouter(prefix="/books", tags=["Books"])
 
 
 @router.get("/", response_model=list[ShowBooks])
-async def get_book_list():
-    return await crud.get_book_list()
+async def get_book_list(page, per_page):
+    return await crud.get_book_list(page, per_page)
 
 
 @router.get("/title/{title}", response_model=list[ShowBooks])

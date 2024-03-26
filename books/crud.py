@@ -1,3 +1,4 @@
+import math
 from sqlalchemy import select
 from db import async_session
 from models import BookModel, AuthorModel, BookAuthorModel, Book_CopiesModel
@@ -11,9 +12,9 @@ async def get_books(title):
     return result
 
 
-async def get_book_list():
-    statement = select(BookModel)
-    result = await helper.get_request_all(statement)
+async def get_book_list(page: int = 1, per_page: int = 10):
+    paginate = helper.Paginate(page=page, per_page=per_page)
+    result = await helper.pagination(paginate, BookModel)
     return result
 
 
