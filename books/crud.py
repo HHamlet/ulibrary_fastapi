@@ -1,4 +1,3 @@
-import math
 from sqlalchemy import select
 from db import async_session
 from models import BookModel, AuthorModel, BookAuthorModel, Book_CopiesModel
@@ -51,47 +50,59 @@ async def create_book_entity(book: CreateBookModel):
                     first_name=book.author_name, last_name=book.author_surname
                 )
                 session.add_all([statement_book, statement_author])
-                session.commit()
+                await session.flush()
                 statement_book_author = BookAuthorModel(
                     author_id=statement_author.id, book_id=statement_book.id
                 )
                 session.add(statement_book_author)
                 statement_book_copies = Book_CopiesModel(
-                    book_id=statement_book.id, isbn=book.isbn, year=book.published_year
+                    book_id=statement_book.id,
+                    isbn=book.isbn,
+                    year=book.published_year,
+                    price=book.price,
                 )
                 session.add(statement_book_copies)
-                session.commit()
+                await session.commit()
             elif (book_res is None) and (author_res is not None):
                 statement_book = BookModel(
                     title=book.title, year_first_published=book.year
                 )
                 session.add(statement_book)
-                session.commit()
+                await session.commit()
                 statement_book_author = BookAuthorModel(
                     author_id=author_res.id, book_id=statement_book.id
                 )
                 statement_book_copies = Book_CopiesModel(
-                    book_id=statement_book.id, isbn=book.isbn, year=book.published_year
+                    book_id=statement_book.id,
+                    isbn=book.isbn,
+                    year=book.published_year,
+                    price=book.price,
                 )
                 session.add_all([statement_book_author, statement_book_copies])
-                session.commit()
+                await session.commit()
             elif (book_res is not None) and (author_res is None):
                 statement_author = AuthorModel(
                     first_name=book.author_name, last_name=book.author_surname
                 )
                 session.add(statement_author)
-                session.commit()
+                await session.commit()
                 statement_book_author = BookAuthorModel(
                     author_id=statement_author.id, book_id=book_res.id
                 )
                 statement_book_copies = Book_CopiesModel(
-                    book_id=book_res.id, isbn=book.isbn, year=book.published_year
+                    book_id=book_res.id,
+                    isbn=book.isbn,
+                    year=book.published_year,
+                    price=book.price,
                 )
                 session.add_all([statement_book_author, statement_book_copies])
-                session.commit()
+                await session.commit()
             else:
                 statement_book_copies = Book_CopiesModel(
-                    book_id=book_res.id, isbn=book.isbn, year=book.published_year
+                    book_id=book_res.id,
+                    isbn=book.isbn,
+                    year=book.published_year,
+                    price=book.price,
                 )
                 session.add(statement_book_copies)
-                session.commit()
+                await session.commit()

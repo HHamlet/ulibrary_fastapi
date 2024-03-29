@@ -8,6 +8,7 @@ class CreateBookModel(BaseModel):
     year: int
     isbn: str | None = ""
     published_year: int | None = 0
+    price: int | None = 0
 
 
 class ShowBooks(BaseModel):

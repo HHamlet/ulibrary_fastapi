@@ -8,3 +8,8 @@ CONNECTION_STRING = (
     f"postgresql+asyncpg://{DATABASE_USER}:{DATABASE_PASS}@{DATABASE_HOST}:{DATABASE_PORT}/"
     f"{DATABASE_NAME}"
 )
+
+
+class AppConfig:
+    SECRET_KEY = "BI8fjHjRx0yGMXRotypfq3ELLA8lFoptyjiOruWq"
+    SALT_KEY = "mrEizl561lpUI8501Uaxy33WyFODXMd2S8kqV8lDdHEWZ2wWVvuQbcsYMvevtzBs"
