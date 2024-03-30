@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 DATABASE_HOST = "localhost"
 DATABASE_PORT = "5432"
 DATABASE_USER = "postgres"
@@ -11,5 +16,5 @@ CONNECTION_STRING = (
 
 
 class AppConfig:
-    SECRET_KEY = "BI8fjHjRx0yGMXRotypfq3ELLA8lFoptyjiOruWq"
-    SALT_KEY = "mrEizl561lpUI8501Uaxy33WyFODXMd2S8kqV8lDdHEWZ2wWVvuQbcsYMvevtzBs"
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    SALT_KEY = os.getenv("SALT_KEY")
