@@ -61,11 +61,8 @@ async def filter_by_price(p_min: int | None = 0, p_max: int | None = 50):
         async with session.begin():
             result = await session.execute(statement)
             rows = result.fetchall()
-    for el in rows:
-        price = el[0].price
-        if price is not None and (price >= p_min) and (price <= p_max):
-            print(el)
-    return rows
+    filtered_rows = [row for row in rows if p_min <= row[0].price <= p_max]
+    return filtered_rows
 
 
 # asyncio.run(filter_by_author("Aditya", "Bhagrava"))
