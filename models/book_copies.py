@@ -15,4 +15,4 @@ class Book_CopiesModel(BaseModel):
     price: Mapped[int] = mapped_column(nullable=True)
 
     def __repr__(self):
-        return f"Book_CopiesModel(id={self.id},Book={self.book} ISBN={self.isbn}, Year={self.year})"
+        return f"Book_CopiesModel(id={self.id},Book={self.book} ISBN={self.isbn}, Year={self.year}, Price={self.price})"
